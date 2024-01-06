@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>From here you can Add more products</h1>
+    
+    <form action="/products" method="POST">
+         
+        <div>
+
+            <label for="name"></label>
+            Name: <input type="text" id="name" name="name">
+        </div>
+         <hr>
+        <div>
+
+            <label for="img"></label>
+            Image: <input type="text" id="img" name="img">
+        </div>
+         
+        <hr>
+        <div>
+            
+            <label for="price"></label>
+            Price: <input type="text" id="price" name="price">
+        </div>
+        
+        <hr>
+        <div>
+            
+            <label for="desc">Description: </label>
+          <textarea name="desc" id="desc" cols="30" rows="10">Desc</textarea>
+        </div>
+         
+        <hr>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

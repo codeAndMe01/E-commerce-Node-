@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     
+    <h2>Your product is <span><%= foundProduct.name%></span> </h1>
+
+    <img src="<%= foundProduct.img ? foundProduct.img : 'not supported' %>" width="200px" height="200px" alt="img">
+     <h4><%= foundProduct.price%></h4>
+     <h4><%= foundProduct.desc%></h4>
+     
+     <button ><a href="/products/<%=foundProduct.id%>/edit">Edit Product</a></button>
+     <button ><a href="/products">All Products</a></button>
+      
+</body>
+</html>
