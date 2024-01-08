@@ -4,7 +4,9 @@ const path = require('path')
 const mongoose = require('mongoose');
 const seed = require('./seed');
 const productRoutes = require('./routes/products');
-var methodOverride = require('method-override')
+const reviewRoutes = require('./routes/review');
+const methodOverride = require('method-override')
+
 
 
 const PORT = '8080'
@@ -24,6 +26,7 @@ mongoose.connect('mongodb://localhost:27017/e-comm')
 // seed();  //calling cause it was function
 
 app.use(productRoutes) //so that URl pass through this middle ware for incommng reqst
+app.use(reviewRoutes) 
 
 app.listen(PORT,()=>{
     console.log(`You are connected to ${PORT}`)

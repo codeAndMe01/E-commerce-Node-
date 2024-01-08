@@ -8,13 +8,14 @@
 <body>
 
     <h1>Here is your products</h1>
+    <button><a href="/products/new">Click to Add  New Product </a></button> 
      
     <% for(let items of products){ %>
          
-        <h3><%= items.name %></h3>
+        <h3>Product Name: <%= items.name %></h3>
          <img src="<%= items.img %>" width="200px" height="200px" alt="img">
-        <h3><%= items.price %></h3>
-        <h3><%= items.desc %></h3>
+        <h3>Price: <%= items.price %></h3>
+        <h3>Description: <%= items.desc %></h3>
 
          <button><a href="/products/<%=items._id%>">Show Product</a></button> 
          <button ><a href="/products/<%=items.id%>/edit">Edit Product</a></button>

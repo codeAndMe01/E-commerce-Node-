@@ -20,7 +20,13 @@ const productSchema = new Schema({
     desc:{
         type:String,
         trim:true,
-    }
+    },
+    reviews:[
+        {
+            type:mongoose.Schema.Types.ObjectId, //meaning mongoose go on diff Schema or jiska type Object Id uska yaha le aao
+            ref: 'Review' 
+        }
+    ]
 
 })
  
