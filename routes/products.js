@@ -1,5 +1,6 @@
 const express = require('express');
 const Product = require('../models/Product')
+const Review = require('../models/Review')
 const router = express.Router();    //mini-app(instance)
 const {validateProduct} = require('../middleare');
 
@@ -42,6 +43,7 @@ router.post('/products',validateProduct, async (req,res)=>{
           await Product.create({name,img,price,desc}) //mogoose method MOdel.create to update single entity
       
       //      res.send(req.body)
+        req.flash('success','New Product added successfully') 
          res.redirect('/products');
             
       } catch (error) {
@@ -59,9 +61,14 @@ router.get('/products/:id',async (req,res)=>{
             // console.log(req.params)
             
             const foundProduct =  await Product.findById(id).populate('reviews'); //populating 
-            console.log(foundProduct)
+            // console.log(foundProduct)
       
-            res.render('show',{foundProduct});
+            // console.log(req.flash('msg')); // Log the flashed messages
+            
+            // res.send(req.flash('success'))
+
+            res.render('show', { foundProduct,success:req.flash('msg')});
+            // msg: req.flash('msg') 
       } catch (error) {
             res.render('error' , {err:e.message});
       }
@@ -93,7 +100,7 @@ router.patch('/products/:id', async (req,res)=>{
             const {name,img,price,desc} = req.body;  //cause it apost requst as well;
       
             await Product.findByIdAndUpdate(id, {name,img,price,desc})
-             
+             req.flash('success',"New details added successfully");// Setting flash msg
              res.redirect('/products')
       } catch (error) {
             res.render('error',{err:e.message})
@@ -107,21 +114,20 @@ router.patch('/products/:id', async (req,res)=>{
 router.delete('/products/:id', async (req,res)=>{
      
       try {
-            const {id} = req.params;
-      
-            const foundProduct = await Product.findById(id);
-      
-            for(let ids of foundProduct.reviews){
-                 await reviews.findByIdAndDelete(ids);
+            let {id} = req.params;
+            const product = await Product.findById(id);
+            
+           
+            for(let id of product.reviews){
+                await Review.findByIdAndDelete(id);
             }
-      
-      
-            await Product.findByIdAndDelete(id)
-          
+            
+            await Product.findByIdAndDelete(id);
+            req.flash('success' , 'Product deleted successfully');
             res.redirect('/products');
             
       } catch (error) {
-            res.render('error',{err:e.message})
+            res.render('error',{err:error.message})
       }
 
 

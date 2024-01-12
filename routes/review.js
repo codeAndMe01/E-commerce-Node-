@@ -23,7 +23,10 @@ router.post('/products/:id/review',validateReview, async (req,res)=>{
         review.save();   //cause there would be chaneg in review model 
      
             
-        res.redirect(`/products/${id}`)
+        // console.log(req.flash('success')); // Log the flashed messages
+        req.flash('msg',"Review added successfully");// Setting flash msg
+        res.redirect(`/products/${id}`);
+        
     } catch (error) {
         res.render('error',{err:e.message});
     }

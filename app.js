@@ -5,8 +5,13 @@ const mongoose = require('mongoose');
 const seed = require('./seed');
 const productRoutes = require('./routes/products');
 const reviewRoutes = require('./routes/review');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+var session = require('express-session');
+var flash = require('connect-flash');
 
+mongoose.connect('mongodb://localhost:27017/e-comm')
+.then(()=>{console.log('DB is connected')})
+.catch((error)=>{console.log("error is :" ,error)});
 
 
 const PORT = '8080'
@@ -19,9 +24,28 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(express.urlencoded({extended:true})) ; //to populate from data
 app.use(methodOverride('_method'))
 
-mongoose.connect('mongodb://localhost:27017/e-comm')
-.then(()=>{console.log('DB is connected')})
-.catch((error)=>{console.log("error is :" ,error)});
+//to use session middlware effectively getting inside an variable 
+
+
+//session & flash
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  // cookie: { secure: true } commented cause its for https and we use htpp when we are not hoisting on live server
+}))
+
+app.use(flash());
+
+//using after the flash cause we flash to work on it 
+app.use((req,res,next)=>{
+  res.locals.success = req.flash('success') 
+  res.locals.error = req.flash('error')
+  
+  next();
+  
+})
+
 
 // seed();  //calling cause it was function
 

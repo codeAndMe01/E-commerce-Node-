@@ -1,35 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 
-    <h1>Here is your products</h1>
-    <button><a href="/products/new">Click to Add  New Product </a></button> 
-     
-    <% for(let items of products){ %>
+
+ <%-include('partials/header')%>
+    <section class="row" >
+
+        
+        <div class="mx-5 my-5 row ">
+        <h1 class="col-8">Here is your products</h1>
+        <button class="col-2"><a href="/products/new">Click to Add  New Product </a></button> 
+        
+         <%-include('./partials/flash.ejs')%>
+       </div>
+
+       
          
-        <h3>Product Name: <%= items.name %></h3>
-         <img src="<%= items.img %>" width="200px" height="200px" alt="img">
-        <h3>Price: <%= items.price %></h3>
-        <h3>Description: <%= items.desc %></h3>
+        <div class="mx-5  border col-6">
+        
+        <% for(let items of products){ %>
+            
+            <h3>Product Name: <%= items.name %></h3>
+            <img src="<%= items.img %>" width="200px" height="200px" alt="img">
+            <h3>Price: <%= items.price %></h3>
+            <h3>Description: <%= items.desc %></h3>
+            
+           <div class="row">
 
-         <button><a href="/products/<%=items._id%>">Show Product</a></button> 
-         <button ><a href="/products/<%=items.id%>/edit">Edit Product</a></button>
-           
-         <form action="/products/<%=items.id%>?_method=Delete" method="POST">
-
-             <button >Delete Product</button>
-         </form>
-
-        <hr>
-
-    <% } %>
-
-
-
-</body>
-</html>
+               <button class="mx-2 col-3"><a href="/products/<%=items._id%>">Show Product</a></button> 
+               <button class="mx-2 col-3"><a href="/products/<%=items.id%>/edit">Edit Product</a></button>
+               
+               <form class="col-3" action="/products/<%=items.id%>?_method=Delete" method="POST">
+                   
+                   <button>Delete Product</button>
+                </form>
+                
+            </div> 
+            <hr>
+            
+            <% } %>
+            
+        </div>  
+      
+        </section>
+            
+        <%-include('partials/footer')%>
