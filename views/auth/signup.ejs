@@ -1,0 +1,42 @@
+
+<%-include('../partials/header')%>
+<div>
+    <h1 class="mx-5 my-5 text-center">SignUp Form</h1>
+
+    <div class="mx-5 my-5 row">
+
+    <form class="d-flex flex-column align-items-center justify-content-center"  action="/register"  method="POST" >
+      <div class="mb-3 col-6">
+        <label for="username" class="form-label">UserName:</label>
+        <input type="text" class="form-control" id="username" name="username"  aria-describedby="emailHelp">
+      </div>
+
+
+      <div class="mb-3 col-6">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" name="email"  aria-describedby="emailHelp">
+      </div>
+
+
+      <div class="mb-3 col-6">
+        <label for="gender" class="form-label">Gender:</label>
+        <input type="text" class="form-control" id="gender" name="gender"  aria-describedby="emailHelp">
+
+      </div>
+
+      <div class=" mb-3 col-6">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password"  aria-describedby="emailHelp">
+        
+      </div>
+      
+
+       <button type="submit" >Submit</button>
+       <p>Already have an account <a href="/login">Login here</a></p>
+    </form>
+
+  </div>
+ 
+  
+
+<%-include('../partials/footer')%>

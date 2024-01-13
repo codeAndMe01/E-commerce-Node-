@@ -1,3 +1,24 @@
+button{
+  text-decoration: none;
+  color: inherit;
+
+  /* Style your button as needed */
+  /* background-color: #4CAF50; Green background color */
+  padding: 5px 10px; /* Padding for better appearance */
+  /* border: none; Remove border */
+  cursor: pointer; 
+}
+a{
+  color: white;
+  text-decoration: none;
+  border-bottom: none;
+
+}
+button a{
+  text-decoration: none; /* Remove underline */
+  color: black; /* Change text color to black, replace with your desired color */
+}
+
 .starability-result {
     position: relative;
     width: 150px;

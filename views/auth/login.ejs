@@ -1,0 +1,33 @@
+
+<%-include('../partials/header')%>
+<%-include('../partials/navbar')%>
+<%-include('../partials/flash')%>
+<h1 class="mx-5 my-5 text-center">Login Form</h1>
+
+
+<div>
+
+    <div class="mx-5 my-5 row ">
+
+    <form class="d-flex flex-column align-items-center justify-content-center" action="/login"  method="POST" >
+      <div class="mb-3 col-6 ">
+        <label for="username" class="form-label">UserName:</label>
+        <input type="text" class="form-control" id="username" name="username"  aria-describedby="emailHelp">
+      </div>
+
+      <div class=" mb-3 col-6">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password"  aria-describedby="emailHelp">
+        
+      </div>
+      
+
+       <button type="submit" >Login</button>
+       <p>Don't have an account <a href="/register">SignUp here</a></p>
+    </form>
+
+  </div>
+ 
+  
+
+<%-include('../partials/footer')%>
