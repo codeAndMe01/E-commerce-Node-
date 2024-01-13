@@ -26,7 +26,12 @@ const productSchema = new Schema({
             type:mongoose.Schema.Types.ObjectId, //meaning mongoose go on diff Schema or jiska type Object Id uska yaha le aao
             ref: 'Review' 
         }
-    ]
+    ],
+    author: {
+            type:mongoose.Schema.Types.ObjectId, //meaning mongoose go on diff Schema or jiska type Object Id uska yaha le aao
+            ref: 'User' 
+        }
+    
 
 })
  

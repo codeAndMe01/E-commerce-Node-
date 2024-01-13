@@ -6,9 +6,9 @@
     <section  >
 
         
-        <div class="mx-5 my-5 row ">
-        <h1 class="col-9 ps-5 ms-5">Here is your products</h1>
-        <button class="col-2"><a href="/products/new">Click to Add  New Product </a></button> 
+        <div class="mx-5 my-5  ">
+        <h1 class="d-flex flex-column align-items-center justify-content-center">Here is your products</h1>
+        <!-- <button class="col-2"><a href="/products/new">Click to Add  New Product </a></button>  -->
         
          <%-include('./partials/flash.ejs')%>
        </div>
@@ -27,17 +27,9 @@
             <h3>Price: <%= items.price %></h3>
             <h3>Description: <%= items.desc %></h3>
             
-           <div class="d-flex  align-items-center justify-content-center ">
-
-               <button class=" mx-2 col-3"><a href="/products/<%=items._id%>">Show Product</a></button> 
-               <button class="mx-2 col-3"><a href="/products/<%=items.id%>/edit">Edit Product</a></button>
-               
-               <form class="col-3" action="/products/<%=items.id%>?_method=Delete" method="POST">
-                   
-                   <button>Delete Product</button>
-                </form>
+               <button class=" "><a href="/products/<%=items._id%>">Show Product</a></button> 
                 
-            </div> 
+
             <hr>
             
             <% } %>

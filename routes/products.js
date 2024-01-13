@@ -2,7 +2,7 @@ const express = require('express');
 const Product = require('../models/Product')
 const Review = require('../models/Review')
 const router = express.Router();    //mini-app(instance)
-const {validateProduct} = require('../middleare');
+const {validateProduct,isLoggedIn,isSeller,isProductAuthor} = require('../middleare');
 
 //dispalying products
 router.get('/products',async (req,res)=>{
@@ -13,7 +13,7 @@ router.get('/products',async (req,res)=>{
             // console.log(products); // Log products to the console
             res.render('index', {products})
             
-      } catch (error) {
+      } catch (e) {
             // console.log(error);
             res.render('error' ,{err:e.message})
       }
@@ -21,12 +21,12 @@ router.get('/products',async (req,res)=>{
 
 
 //displaying form to add new products
-router.get('/products/new',(req,res)=>{
+router.get('/products/new',isLoggedIn,isSeller,(req,res)=>{
       try{
             
             res.render('new');
       }
-       catch (error) {
+       catch (e) {
       // console.log(error);
       res.render('error' ,{err:e.message})
 }
@@ -35,18 +35,18 @@ router.get('/products/new',(req,res)=>{
 
 
 //actually adding new products
-router.post('/products',validateProduct, async (req,res)=>{
+router.post('/products',isLoggedIn,isSeller,validateProduct, async (req,res)=>{
       try {
             // console.log(req)
            const {name,img,price,desc} = (req.body);
             
-          await Product.create({name,img,price,desc}) //mogoose method MOdel.create to update single entity
+          await Product.create({name,img,price,desc,author:req.user._id}) //mogoose method MOdel.create to update single entity
       
       //      res.send(req.body)
         req.flash('success','New Product added successfully') 
          res.redirect('/products');
             
-      } catch (error) {
+      } catch (e) {
             res.render('error',{err:e.message});
       }
 })
@@ -54,7 +54,7 @@ router.post('/products',validateProduct, async (req,res)=>{
 
 
 //showing particular product
-router.get('/products/:id',async (req,res)=>{
+router.get('/products/:id',isLoggedIn,async (req,res)=>{
       
       try {
             const {id} = req.params;
@@ -62,14 +62,10 @@ router.get('/products/:id',async (req,res)=>{
             
             const foundProduct =  await Product.findById(id).populate('reviews'); //populating 
             // console.log(foundProduct)
-      
-            // console.log(req.flash('msg')); // Log the flashed messages
-            
-            // res.send(req.flash('success'))
 
             res.render('show', { foundProduct,success:req.flash('msg')});
             // msg: req.flash('msg') 
-      } catch (error) {
+      } catch (e) {
             res.render('error' , {err:e.message});
       }
     
@@ -78,7 +74,7 @@ router.get('/products/:id',async (req,res)=>{
 
 
 //edit form displaying 
-router.get('/products/:id/edit',async(req,res)=>{
+router.get('/products/:id/edit',isLoggedIn,isSeller,isProductAuthor,async(req,res)=>{
       try {
             const {id} = req.params;
    
@@ -94,7 +90,7 @@ router.get('/products/:id/edit',async(req,res)=>{
 
 
 //actually updating form to DB 
-router.patch('/products/:id', async (req,res)=>{
+router.patch('/products/:id',isLoggedIn,isSeller,isProductAuthor, async (req,res)=>{
       try {
             const {id} = req.params;
             const {name,img,price,desc} = req.body;  //cause it apost requst as well;
@@ -102,7 +98,7 @@ router.patch('/products/:id', async (req,res)=>{
             await Product.findByIdAndUpdate(id, {name,img,price,desc})
              req.flash('success',"New details added successfully");// Setting flash msg
              res.redirect('/products')
-      } catch (error) {
+      } catch (e) {
             res.render('error',{err:e.message})
       }
        
@@ -111,7 +107,7 @@ router.patch('/products/:id', async (req,res)=>{
 
 
 //delting particular product
-router.delete('/products/:id', async (req,res)=>{
+router.delete('/products/:id',isLoggedIn,isSeller,isProductAuthor, async (req,res)=>{
      
       try {
             let {id} = req.params;
@@ -126,8 +122,8 @@ router.delete('/products/:id', async (req,res)=>{
             req.flash('success' , 'Product deleted successfully');
             res.redirect('/products');
             
-      } catch (error) {
-            res.render('error',{err:error.message})
+      } catch (e) {
+            res.render('error',{err:e.message})
       }
 
 

@@ -40,7 +40,12 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  // cookie: { secure: true } commented cause its for https and we use htpp when we are not hoisting on live server
+  // cookie: { secure: true } commented cause its for https(s = secure) and we use htpp when we are not hoisting on live server
+   cookie:{  
+    httpOnly:true,
+    expires:Date.now() + 7*24*60*60*1000,
+    maxAge: 7*24*60*60*1000     
+   }
 }))
 
 app.use(flash());
@@ -62,6 +67,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 //using after the flash cause we want flash to work on it 
 app.use((req,res,next)=>{
+  res.locals.currentUser = req.user //seting user in local so that we can get it in entire login session
   res.locals.success = req.flash('success') 
   res.locals.error = req.flash('error')
   

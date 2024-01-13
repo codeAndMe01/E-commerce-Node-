@@ -1,3 +1,4 @@
+const { string } = require('joi');
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -10,6 +11,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         trim: true,
         required:true
+    },
+    role:{
+        type:String,
+        default:'buyer'
     },
     gender:{
         type:String,
