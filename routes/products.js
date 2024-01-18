@@ -1,7 +1,7 @@
 const express = require('express');
+const router = express.Router();    //mini-app(instance)
 const Product = require('../models/Product')
 const Review = require('../models/Review')
-const router = express.Router();    //mini-app(instance)
 const {validateProduct,isLoggedIn,isSeller,isProductAuthor} = require('../middleare');
 
 //dispalying products
@@ -52,7 +52,7 @@ router.post('/products',isLoggedIn,isSeller,validateProduct, async (req,res)=>{
 })
 
 
-
+ 
 //showing particular product
 router.get('/products/:id',isLoggedIn,async (req,res)=>{
       

@@ -24,7 +24,10 @@
             
             <h3>Product Name: <%= items.name %></h3>
             <img src="<%= items.img %>" width="200px" height="200px" alt="img">
-            <h3>Price: <%= items.price %></h3>
+            <h3>Price: <%= items.price %></h3> 
+            <span class="btn like-btn" product-id="<%= items._id %>" > 
+                <i class="fa-regular fa-heart"></i>
+            </span>
             <h3>Description: <%= items.desc %></h3>
             
                <button class=" "><a href="/products/<%=items._id%>">Show Product</a></button> 
@@ -39,5 +42,7 @@
     </div>
       
         </section>
+
+        <script src="/js/script.js"></script>
             
         <%-include('partials/footer')%>

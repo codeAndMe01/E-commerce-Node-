@@ -14,6 +14,7 @@ const User = require('./models/User');
 const productRoutes = require('./routes/products');
 const reviewRoutes = require('./routes/review');
 const authRoutes = require('./routes/auth');
+const productAPI = require('./routes/API/productAPI');
 
 
 
@@ -32,7 +33,6 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(express.urlencoded({extended:true})) ; //to populate from data
 app.use(methodOverride('_method'))
 
-//to use session middlware effectively getting inside an variable 
 
 
 //session & flash
@@ -81,6 +81,7 @@ app.use((req,res,next)=>{
 app.use(productRoutes) //so that URl pass through this middle ware for incommng reqst
 app.use(reviewRoutes) 
 app.use(authRoutes)
+app.use(productAPI)
 
 app.listen(PORT,()=>{
     console.log(`You are connected to ${PORT}`)

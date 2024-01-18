@@ -13,7 +13,7 @@ router.post('/products/:id/review',validateReview, async (req,res)=>{
     
         const product = await Product.findById(id);
     
-        //this is class syntax so we have to save model in end in createOne || createMany 
+        //this is class syntax so we have to save model in end and in createOne || createMany 
         // mongoose dosent require to save 
         const review = new Review({rating,comment}); //new review creating in Review Schema 
          

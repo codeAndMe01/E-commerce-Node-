@@ -24,7 +24,14 @@ const validateReview = (req,res,next)=>{
 }
 
 const isLoggedIn = (req,res,next)=>{
-   
+    
+    if(req.xhr && !req.isAuthenticated()){
+        req.flash('error','You need to login first');
+        return res.status(400).send({msg:'You need to login first'})
+        
+    }
+
+
     if(!req.isAuthenticated()){   //isAuthenticated return true if login else false static method from passport
        
         req.flash('error','You need to login first');
