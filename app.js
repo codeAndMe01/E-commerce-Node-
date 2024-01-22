@@ -15,6 +15,7 @@ const productRoutes = require('./routes/products');
 const reviewRoutes = require('./routes/review');
 const authRoutes = require('./routes/auth');
 const productAPI = require('./routes/API/productAPI');
+const cartRoutes =  require('./routes/cart')
 
 
 
@@ -82,6 +83,7 @@ app.use(productRoutes) //so that URl pass through this middle ware for incommng 
 app.use(reviewRoutes) 
 app.use(authRoutes)
 app.use(productAPI)
+app.use(cartRoutes)
 
 app.listen(PORT,()=>{
     console.log(`You are connected to ${PORT}`)

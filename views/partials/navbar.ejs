@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg px-5 navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="">Shoping Web</a>
+      <a class="navbar-brand" href=""><i class="fas fa-shopping-basket" style="margin-right: 10px;font-size: 1.7rem;"></i>Shoping Web</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto d-flex align-items-center bolder  mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/products">All Products</a>
+            <a class="nav-link text-capitalize active" aria-current="page" href="/products">All Products</a>
           </li>
           <%if(currentUser && currentUser.role === 'seller'){%>
 
@@ -15,13 +15,22 @@
               <a class="nav-link active" aria-current="page" href="/products/new">Add New Products</a>
             </li>
           <%}%>
-
-
         </ul>
         <div class="d-flex">
           <%if(!currentUser){%>
             <a href="/login"><button class="mx-5 my-2  btn btn-outline-light" type="submit">Log-in</button></a>
           <%}else{%>
+            <ul class="navbar-nav me-auto d-flex align-items-center bolder  mb-lg-0">
+              <li>
+                <a href="#"  class="nav-link text-capitalize">Hello <%=currentUser.username%></a> 
+              </li>
+              <li>
+                <a href="/user/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> 
+                  <sup><span class="badge bg-danger"><%=currentUser.cart.length%></span></sup> 
+                </a>
+              </li>
+            </ul>
+             
             <a href="/logout"><button class="mx-3 my-2 btn btn-outline-light" type="submit">Log-out</button></a>
           <%}%>
         </div>
