@@ -56,7 +56,7 @@ router.post("/user/:id/remove", isLoggedIn, async (req, res) => {
 });
 
 
-router.get('/checkout/:id',isLoggedIn, async (req, res) => {
+router.get('/checkout/:id', async (req, res) => {
     const userId = req.params.id;
     const user = await User.findById(userId).populate('cart');
     //  console.log(userId);
