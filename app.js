@@ -9,6 +9,7 @@ var flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const User = require('./models/User');
+const dotenv = require('dotenv').config();
 
 //routes
 const productRoutes = require('./routes/products');
@@ -17,14 +18,15 @@ const authRoutes = require('./routes/auth');
 const productAPI = require('./routes/API/productAPI');
 const cartRoutes =  require('./routes/cart')
 
+mongoose.set("strictQuery",true);
+let url = process.env.MONGO_URL
 
-
-mongoose.connect('mongodb://localhost:27017/e-comm')
+mongoose.connect(url)
 .then(()=>{console.log('DB is connected')})
 .catch((error)=>{console.log("error is :" ,error)});
 
 
-const PORT = '8080'
+
 //setting view-engine and views directory
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'))
@@ -85,6 +87,6 @@ app.use(authRoutes)
 app.use(productAPI)
 app.use(cartRoutes)
 
-app.listen(PORT,()=>{
-    console.log(`You are connected to ${PORT}`)
+app.listen(process.env.PORT,()=>{
+    console.log(`You are connected to ${process.env.PORT}`)
 })

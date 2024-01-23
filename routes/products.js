@@ -10,6 +10,13 @@ const {
 } = require("../middleare");
 const User = require("../models/User");
 
+//for home page
+router.get('/',(req,res)=>{  
+   
+  res.render('home')
+})
+
+
 //dispalying products
 router.get("/products", async (req, res) => {
   try {
