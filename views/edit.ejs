@@ -2,39 +2,43 @@
 <%-include('./partials/header')%>
 <%-include('./partials/navbar')%>
 
-    <h1 class="text-center">From here you can Edit your product</h1>
+    <h1 class="display-6 bolder text-center my-3">Edit Product: If you want to </h1>
     
-    <form action="/products/<%=foundProduct.id%>?_method=PATCH" method="POST">
-         
-        <div>
-
-            <label for="name"></label>
-            Name: <input type="text" id="name" value="<%=foundProduct.name%>" name="name">
-        </div>
-         <hr>
-        <div>
-
-            <label for="img"></label>
-            <img src="<%=foundProduct.img%>" width="200px" height="200px" alt="">
-            Image: <input type="text" id="img" value="<%=foundProduct.img%>" name="img">
-        </div>
-         
-        <hr>
-        <div>
+    <div class="mx-5 my-5 ">    <form action="/products/<%=foundProduct.id%>?_method=PATCH" method="POST">
+        <div class="mb-3 col-6">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="<%=foundProduct.name%> " aria-describedby="emailHelp">
+          
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please enter Price.</div>
+          </div>
+    
+    
+          <div class="mb-3 col-6">
+            <label for="img" class="form-label">Image:</label>
+            <input type="text" class="form-control" id="img" name="img" value="<%=foundProduct.img%>" aria-describedby="emailHelp">
+          </div>
+    
+    
+          <div class="mb-3 col-6">
+            <label for="price" class="form-label">Price:</label>
+            <input type="text" class="form-control" id="price" name="price" value="<%=foundProduct.price%>" required aria-describedby="emailHelp">
+           
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please enter Price.</div>
+          </div>
+    
+          <div class=" mb-3 col-6">
+            <label for="desc">Description:</label>
+            <textarea class="form-control" name="desc" placeholder="Do write some desc.." id="desc"><%=foundProduct.desc%></textarea>
             
-            <label for="price"></label>
-            Price: <input type="text" id="price" value="<%=foundProduct.price%>" name="price">
-        </div>
-        
-        <hr>
-        <div>
-            
-            <label for="desc">Description: </label>
-          <textarea name="desc" id="desc" cols="30" rows="10"><%=foundProduct.desc%></textarea>
-        </div>
-         
-        <hr>
-        <button type="submit">Add Changes</button>
+          </div>
+          
+    
+           <button class="btn btn-outline-dark" type="submit" >Add Changes</button>
     </form>
+
+</div>
+
 
     <%-include('partials/footer')%>

@@ -1,10 +1,9 @@
 
-/* a{
+.custom-card {
+  height: 10rem; /* Set your desired height */
+  width: 10rem;
   color: white;
-  text-decoration: none;
-  border-bottom: none;
-
-} */
+}
 ul{
   /* color: white; */
 }

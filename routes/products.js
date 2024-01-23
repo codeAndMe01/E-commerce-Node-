@@ -61,9 +61,10 @@ router.get("/products/:id", isLoggedIn, async (req, res) => {
     // console.log(req.params)
 
     const foundProduct = await Product.findById(id).populate("reviews"); //populating
-    // console.log(foundProduct)
+    console.log(typeof(id))
 
-    res.render("show", { foundProduct, success: req.flash("msg") });
+
+    res.render("show", { foundProduct,id, success: req.flash("msg") });
     // msg: req.flash('msg')
   } catch (e) {
     res.render("error", { err: e.message });

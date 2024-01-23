@@ -22,13 +22,19 @@
               <p class="card-text"><%= foundProduct.desc %></p>
               <a href="#" class="btn btn-outline-primary btn-sm">Buy</a>
               <!-- <a href="#" class="btn btn-secondary">Add to Cart</a> -->
-              <form
+
+              <% if(currentUser && !currentUser.cart.includes(foundProduct._id)){ %>
+
+                <form
                 class="d-inline-block"
                 action="/user/<%=foundProduct._id%>/add"
                 method="POST"
-              >
+                >
                 <button class="btn btn-outline-success  btn-sm"> Cart</button>
               </form>
+              <% } %>
+
+
               <% if(currentUser && currentUser.role === "seller"){ %>
               <a href="/products/<%=foundProduct._id%>/edit" class="btn btn-outline-info btn-sm"
                 >Edit</a
@@ -76,7 +82,7 @@
                     <textarea name="comment" id="comment"  rows="3"></textarea>
 
                     <br>
-                    <button class="btn btn-outline-warning mb-2" type="submit">Add Review</button>
+                    <button class="btn btn-outline-dark mb-2" type="submit">Add Review</button>
                 </form>
             </div>
 

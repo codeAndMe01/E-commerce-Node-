@@ -13,6 +13,8 @@ router.get("/user/cart", isLoggedIn, async (req, res) => {
   res.render("cart/cart", { user, totalAmount });
 });
 
+
+
 router.post("/user/:id/add", isLoggedIn, async (req, res) => {
   const { id } = req.params;
 
@@ -24,9 +26,11 @@ router.post("/user/:id/add", isLoggedIn, async (req, res) => {
   user.cart.push(product); //we are pushing entire product but only product id will go beacuse of condition in userSchema
   await user.save();
 
-  req.flash("error", "Product has been removed from cart");
+  req.flash("success", "Product has been removed from cart");
   res.redirect("/user/cart");
 });
+
+
 
 router.post("/user/:id/remove", isLoggedIn, async (req, res) => {
   const { id } = req.params;
@@ -49,11 +53,5 @@ router.post("/user/:id/remove", isLoggedIn, async (req, res) => {
   res.redirect("/user/cart");
 });
 
-// router.delete('/user/:id/add',isLoggedIn,async (req,res){
-//       const {id} = req.params;
-
-//
-
-// })
 
 module.exports = router;

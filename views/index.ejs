@@ -2,44 +2,38 @@
 
  <%-include('partials/header')%>
  <%-include('partials/navbar')%>
+ <%-include('./partials/flash.ejs')%>
 
-    <section  >
+    <section class="row mt-5" >
 
         
-        <div class="mx-5 my-5  ">
-        <h1 class="d-flex flex-column align-items-center justify-content-center">Here is your products</h1>
-        <!-- <button class="col-2"><a href="/products/new">Click to Add  New Product </a></button>  -->
-        
-         <%-include('./partials/flash.ejs')%>
-       </div>
+        <h1 class="display-6 text-center">Here is your products</h1>
 
-       
-       <div class="d-flex flex-column align-items-center justify-content-center">
+     
+       <% for(let item of products){ %>
+        <div class="col-lg-3  product-card">
+            <div class="card text-center shadow mt-3 mx-auto" style="width: 18rem;">
+                <img class="img" src="<%=item.img%>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h3 class="card-title"> <%= item.name %> </h3>
+                  <span class="btn like-btn" product-id="<%=item._id%>" >
+                    <% if(currentUser && currentUser.wishlist.includes(item._id)){ %>
+                        <i class="fa-solid fa-heart"></i>
+                    <% } else{ %>
+                        <i class="fa-regular fa-heart"></i>
+                    <% } %>
 
-       
-         
-        <div class="mx-5  border col-6 d-flex flex-column align-items-center justify-content-center ">
-        
-        <% for(let items of products){ %>
-            
-            <h3>Product Name: <%= items.name %></h3>
-            <img src="<%= items.img %>" width="200px" height="200px" alt="img">
-            <h3>Price: <%= items.price %></h3> 
-            <span class="btn like-btn" product-id="<%= items._id %>" > 
-                <i class="fa-regular fa-heart"></i>
-            </span>
-            <h3>Description: <%= items.desc %></h3>
-            
-               <button class=" "><a href="/products/<%=items._id%>">Show Product</a></button> 
-                
+                  </span>
+                  <h5 class="card-title"> Rs: <%= item.price %> </h5>
+                  <p class="card-text"> <%= item.desc %> </p>
+                  <p class="card-text"> <%= item.instock %> </p>
+                  <a href="/products/<%=item._id%>" class="btn btnn btn-outline-dark">View Product</a>
+                </div>
+            </div>
+        </div>
+      <% } %>
 
-            <hr>
-            
-            <% } %>
-            
-        </div>  
-
-    </div>
+    
       
         </section>
 
